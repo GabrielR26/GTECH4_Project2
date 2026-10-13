@@ -1,0 +1,25 @@
+
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "UObject/Interface.h"
+
+#include "Activable.generated.h"
+
+// This class does not need to be modified.
+UINTERFACE(MinimalAPI)
+class UActivable : public UInterface
+{
+	GENERATED_BODY()
+};
+
+class PROJECT2_API IActivable
+{
+	GENERATED_BODY()
+
+public:
+	void Activate();
+	void Deactivate();
+	
+};
