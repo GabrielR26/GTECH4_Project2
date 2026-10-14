@@ -13,10 +13,6 @@ ABaseObject::ABaseObject()
 	mesh->SetupAttachment(RootComponent);
 }
 
-void ABaseObject::Interact()
-{
-}
-
 // Called when the game starts or when spawned
 void ABaseObject::BeginPlay()
 {
@@ -32,9 +28,7 @@ void ABaseObject::Tick(float DeltaTime)
 
 void ABaseObject::Interact()
 {
-	isGrabbed = !isGrabbed;
-	if (mesh)
-		mesh->SetSimulatePhysics(!isGrabbed);
+	
 }
 
 void ABaseObject::SetLocation(FVector _newLocation)
