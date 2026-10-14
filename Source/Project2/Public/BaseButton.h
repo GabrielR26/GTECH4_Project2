@@ -14,6 +14,9 @@ class PROJECT2_API ABaseButton : public AActor, public IInteractable
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere)
+	TArray<AActor*> activableObjects;
+
 	FOnButtonPressed onButtonPressed;
 	
 public:	
