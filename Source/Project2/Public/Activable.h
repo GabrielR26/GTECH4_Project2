@@ -19,7 +19,7 @@ class PROJECT2_API IActivable
 	GENERATED_BODY()
 
 public:
-	void Activate();
-	void Deactivate();
+	virtual void Activate();
+	virtual void Deactivate();
 	
 };
