@@ -10,7 +10,7 @@ class UInputComponent;
 class UInputAction;
 struct FInputActionValue;
 class UCameraComponent;
-class UBoxComponent;
+class UPhysicsHandleComponent;
 
 UCLASS()
 class PROJECT2_API APlayerPlateformer : public ACharacter
@@ -21,7 +21,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess))
 	TObjectPtr<UCameraComponent> cameraComponent = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess))
-	TObjectPtr<UBoxComponent> boxInteractionComponent = nullptr;
+	TObjectPtr<UPhysicsHandleComponent> handleComponent = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess))
 	TObjectPtr<USceneComponent> offsetInteractableComponent = nullptr;
 
@@ -34,17 +34,15 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> lookAction = nullptr;
 
-	AActor* interactable = nullptr;
+	bool isGrabing = false;
 
 public:
 	APlayerPlateformer();
 
 protected:
 	void BeginPlay() override;
+	void Tick(float DeltaTime) override;
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UFUNCTION()
-	void BeginOverlap(UPrimitiveComponent* _overlappedComponent, AActor* _otherActor, UPrimitiveComponent* _otherComp, int32 _otherBodyIndex, bool _bFromSweep, const FHitResult& _sweepResult);
 
 	void MoveInput(const FInputActionValue& Value);
 	void JumpStartInput();

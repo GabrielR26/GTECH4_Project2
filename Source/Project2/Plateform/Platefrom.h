@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Activable.h"
 #include "Platefrom.generated.h"
 
 class UStaticMeshComponent;
@@ -12,7 +13,7 @@ class UStaticMeshComponent;
 /// A plateform moving between 2 location
 /// </summary>
 UCLASS()
-class PROJECT2_API APlateform : public AActor
+class PROJECT2_API APlateform : public AActor, public IActivable
 {
 	GENERATED_BODY()
 
@@ -49,4 +50,8 @@ protected:
 	bool ShouldTickIfViewportsOnly() const override;
 
 	void MovePlateform(const float _deltaTime);
+
+	// Inherited via IActivable
+	void Activate() override;
+	void Deactivate() override;
 };

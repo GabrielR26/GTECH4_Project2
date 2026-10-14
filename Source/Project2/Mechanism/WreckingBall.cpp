@@ -58,6 +58,11 @@ void AWreckingBall::Activate()
 	ballComponent->SetSimulatePhysics(true);
 }
 
+void AWreckingBall::Deactivate()
+{
+	//
+}
+
 #if WITH_EDITOR
 void AWreckingBall::PostEditChangeProperty(FPropertyChangedEvent& _propertyChangedEvent)
 {

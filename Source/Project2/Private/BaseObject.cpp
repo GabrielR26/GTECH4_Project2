@@ -13,6 +13,10 @@ ABaseObject::ABaseObject()
 	mesh->SetupAttachment(RootComponent);
 }
 
+void ABaseObject::Interact()
+{
+}
+
 // Called when the game starts or when spawned
 void ABaseObject::BeginPlay()
 {

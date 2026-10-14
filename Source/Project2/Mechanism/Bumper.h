@@ -9,6 +9,9 @@
 class UStaticMeshComponent;
 class UBoxComponent;
 
+/// <summary>
+/// A bumper that repulse object
+/// </summary>
 UCLASS()
 class PROJECT2_API ABumper : public AActor
 {

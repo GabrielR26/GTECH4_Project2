@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Activable.h"
 #include "WreckingBall.generated.h"
 
 class UStaticMeshComponent;
@@ -14,7 +15,7 @@ class UPhysicsConstraintComponent;
 /// A Wrecking ball to smash smt
 /// </summary>
 UCLASS()
-class PROJECT2_API AWreckingBall : public AActor
+class PROJECT2_API AWreckingBall : public AActor, public IActivable
 {
 	GENERATED_BODY()
 
@@ -35,13 +36,13 @@ protected:
 public:	
 	AWreckingBall();
 
-	UFUNCTION(BlueprintCallable)
-	void Activate();
-
 protected:
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 	bool ShouldTickIfViewportsOnly() const override;
+
+	void Activate() override;
+	void Deactivate() override;
 
 #if WITH_EDITOR
 	void PostEditChangeProperty(FPropertyChangedEvent& _propertyChangedEvent) override;

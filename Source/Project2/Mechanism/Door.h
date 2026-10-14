@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Activable.h"
 #include "Door.generated.h"
 
 class UStaticMeshComponent;
@@ -13,7 +14,7 @@ class UPhysicsConstraintComponent;
 /// A double door/trap that can be opened by physics
 /// </summary>
 UCLASS()
-class PROJECT2_API ADoor : public AActor
+class PROJECT2_API ADoor : public AActor, public IActivable
 {
 	GENERATED_BODY()
 	
@@ -39,9 +40,9 @@ protected:
 public:
 	ADoor();
 
-	UFUNCTION(BlueprintCallable)
-	void OpenDoor();
-
 protected:
 	void BeginPlay() override;
+
+	void Activate() override;
+	void Deactivate() override;
 };

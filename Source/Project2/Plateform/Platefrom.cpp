@@ -29,6 +29,7 @@ void APlateform::BeginPlay()
 
 	// Set Plateform at start offset
 	SetActorLocation(startOffsetLocation);
+	changeState = false;
 }
 
 void APlateform::Tick(float DeltaTime)
@@ -71,6 +72,16 @@ void APlateform::MovePlateform(const float _deltaTime)
 
 	FVector _interp = UKismetMathLibrary::VInterpTo_Constant(_actorLoc, destination, _deltaTime, _speed);
 	SetActorLocation(_interp, true);
+}
+
+void APlateform::Activate()
+{
+	ChangeState();
+}
+
+void APlateform::Deactivate()
+{
+	ChangeState();
 }
 
 void APlateform::ChangeState()

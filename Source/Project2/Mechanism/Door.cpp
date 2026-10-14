@@ -30,7 +30,12 @@ void ADoor::BeginPlay()
 	physicsConstraints0Component->SetLinearBreakable(true, _breakLimit);
 }
 
-void ADoor::OpenDoor()
+void ADoor::Activate()
 {
 	physicsConstraints0Component->BreakConstraint();
+}
+
+void ADoor::Deactivate()
+{
+	//
 }

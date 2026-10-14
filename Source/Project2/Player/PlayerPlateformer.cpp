@@ -4,8 +4,11 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "Camera/CameraComponent.h"
-#include "Components/BoxComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Interactable.h"
+#include "BaseObject.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 
 APlayerPlateformer::APlayerPlateformer()
 {
@@ -13,8 +16,7 @@ APlayerPlateformer::APlayerPlateformer()
 	cameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
 	cameraComponent->SetupAttachment(RootComponent);
 	// Create the box component	for interaction
-	boxInteractionComponent = CreateDefaultSubobject<UBoxComponent>("BoxInteraction");
-	boxInteractionComponent->SetupAttachment(RootComponent);
+	handleComponent = CreateDefaultSubobject<UPhysicsHandleComponent>("PhysicsHandle");
 	// Create the offset component for interactable
 	offsetInteractableComponent = CreateDefaultSubobject<USceneComponent>("OffsetInteractable");
 	offsetInteractableComponent->SetupAttachment(RootComponent);
@@ -23,10 +25,17 @@ APlayerPlateformer::APlayerPlateformer()
 void APlayerPlateformer::BeginPlay()
 {
 	Super::BeginPlay();
+}
 
-	// Bind Overlap event
-	if (boxInteractionComponent)
-		boxInteractionComponent->OnComponentBeginOverlap.AddDynamic(this, &APlayerPlateformer::BeginOverlap);
+void APlayerPlateformer::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (isGrabing)
+	{
+		const FVector _targetLoc = cameraComponent->GetComponentLocation() + (cameraComponent->GetForwardVector() * 250.f);
+		handleComponent->SetTargetLocation(_targetLoc);
+	}
 }
 
 void APlayerPlateformer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -46,12 +55,6 @@ void APlayerPlateformer::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// Bind look action
 		_input->BindAction(lookAction, ETriggerEvent::Triggered, this, &APlayerPlateformer::LookInput);
 	}
-}
-
-void APlayerPlateformer::BeginOverlap(UPrimitiveComponent* _overlappedComponent, AActor* _otherActor, UPrimitiveComponent* _otherComp, int32 _otherBodyIndex, bool _bFromSweep, const FHitResult& _sweepResult)
-{
-	//if (_otherActor->) is interface interactable
-	// II->Interaction(...)
 }
 
 void APlayerPlateformer::MoveInput(const FInputActionValue& Value)
@@ -74,7 +77,33 @@ void APlayerPlateformer::JumpEndInput()
 
 void APlayerPlateformer::InteractInput()
 {
-	// Interaction
+	if (isGrabing)
+	{
+		handleComponent->ReleaseComponent();
+		isGrabing = false;
+		return;
+	}
+
+	const FVector _start = cameraComponent->GetComponentLocation();
+	const FVector _end = _start + (cameraComponent->GetForwardVector() * 250.f);
+	FHitResult _hit;
+	bool _res = UKismetSystemLibrary::LineTraceSingle(GetWorld(), _start, _end, ETraceTypeQuery::TraceTypeQuery1, false, TArray<AActor*>(), EDrawDebugTrace::ForDuration, _hit, true);
+	if (_res)
+	{
+		bool _isInteractable = _hit.GetActor()->Implements<UInteractable>();
+		if (_isInteractable)
+		{
+			IInteractable* _interactableActor = Cast<IInteractable>(_hit.GetActor());
+			_interactableActor->Interact();
+
+			ABaseObject* _object = Cast<ABaseObject>(_hit.GetActor());
+			if (_object)
+			{
+				handleComponent->GrabComponent(_hit.Component.Get(), NAME_None, _hit.Location, true);
+				isGrabing = true;
+			}
+		}
+	}
 }
 
 void APlayerPlateformer::LookInput(const FInputActionValue& Value)

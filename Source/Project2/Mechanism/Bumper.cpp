@@ -23,6 +23,8 @@ void ABumper::BeginPlay()
 
 void ABumper::BeginOverlap(UPrimitiveComponent* _overlappedComponent, AActor* _otherActor, UPrimitiveComponent* _otherComp, int32 _otherBodyIndex, bool _bFromSweep, const FHitResult& _sweepResult)
 {
-	FVector _impulseDirection = (_otherActor->GetActorLocation() - _sweepResult.ImpactPoint).GetSafeNormal(0.1f);
+	_overlappedComponent->SetPhysicsLinearVelocity(FVector::ZeroVector);
+	_overlappedComponent->SetPhysicsAngularVelocityInDegrees(FVector::ZeroVector);
+	FVector _impulseDirection = GetActorUpVector();
 	_otherComp->AddImpulse(_impulseDirection * power * 100);
 }
