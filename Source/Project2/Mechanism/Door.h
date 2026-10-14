@@ -30,6 +30,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess))
 	TObjectPtr<UPhysicsConstraintComponent> physicsConstraints2Component = nullptr;
 
+	UPROPERTY(EditAnywhere, Category = "Variable")
+	TObjectPtr<UMaterialInterface> closeMaterial = nullptr;
+	UPROPERTY(EditAnywhere, Category = "Variable")
+	TObjectPtr<UMaterialInterface> openMaterial = nullptr;
+
 	// Can be breakable by physics
 	UPROPERTY(EditAnywhere, Category = "Variable")
 	bool isBreakable = false;

@@ -24,7 +24,7 @@ protected:
 	TObjectPtr<UBoxComponent> boxComponent = nullptr;
 
 	// The impulse power
-	UPROPERTY(EditAnywhere, Category = "Variable", meta = (ClampMin = 100, ClampMax = 10000))
+	UPROPERTY(EditAnywhere, Category = "Variable", meta = (ClampMin = 50, ClampMax = 5000))
 	int power = 100;
 
 public:	

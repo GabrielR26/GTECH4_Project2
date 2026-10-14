@@ -25,6 +25,9 @@ ADoor::ADoor()
 void ADoor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	door1Component->SetMaterial(0, closeMaterial);
+	door2Component->SetMaterial(0, closeMaterial);
 	
 	float _breakLimit = isBreakable ? breakLimit : 9999999.f;
 	physicsConstraints0Component->SetLinearBreakable(true, _breakLimit);
@@ -33,6 +36,9 @@ void ADoor::BeginPlay()
 void ADoor::Activate()
 {
 	physicsConstraints0Component->BreakConstraint();
+
+	door1Component->SetMaterial(0, openMaterial);
+	door2Component->SetMaterial(0, openMaterial);
 }
 
 void ADoor::Deactivate()
