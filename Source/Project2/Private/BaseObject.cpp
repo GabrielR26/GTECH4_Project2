@@ -26,6 +26,13 @@ void ABaseObject::Tick(float DeltaTime)
 
 }
 
+void ABaseObject::Interact()
+{
+	isGrabbed = !isGrabbed;
+	if (mesh)
+		mesh->SetSimulatePhysics(!isGrabbed);
+}
+
 void ABaseObject::SetLocation(FVector _newLocation)
 {
 	if (!mesh)

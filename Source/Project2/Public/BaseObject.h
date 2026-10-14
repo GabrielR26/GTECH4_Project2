@@ -14,17 +14,13 @@ class PROJECT2_API ABaseObject : public AActor, public IInteractable
 
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* mesh = nullptr;
+
+	bool isGrabbed = false;
 	
 public:	
 	ABaseObject();
-	void Interact();
+	void Interact() override;
 	void SetLocation(FVector _newLocation);
-	void SimulatePhysics(bool _simulate)
-	{
-		if (!mesh)
-			return;
-		mesh->SetSimulatePhysics(_simulate);
-	}
 
 private:
 	virtual void BeginPlay() override;
