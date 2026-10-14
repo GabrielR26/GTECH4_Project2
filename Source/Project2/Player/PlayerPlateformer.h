@@ -22,8 +22,6 @@ protected:
 	TObjectPtr<UCameraComponent> cameraComponent = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess))
 	TObjectPtr<UPhysicsHandleComponent> handleComponent = nullptr;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess))
-	TObjectPtr<USceneComponent> offsetInteractableComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> moveAction = nullptr;

@@ -42,6 +42,7 @@ void ADoor::DoorOpen()
 void ADoor::Activate()
 {
 	physicsConstraints0Component->BreakConstraint();
+	physicsConstraints0Component->SetLinearVelocityTarget(FVector::OneVector);
 	DoorOpen();
 }
 

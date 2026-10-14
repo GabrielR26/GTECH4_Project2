@@ -41,7 +41,6 @@ protected:
 public:
 	APlateform();
 
-	UFUNCTION(BlueprintCallable)
 	void ChangeState();
 
 protected:

@@ -15,11 +15,8 @@ APlayerPlateformer::APlayerPlateformer()
 	// Create the camera component	
 	cameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
 	cameraComponent->SetupAttachment(RootComponent);
-	// Create the box component	for interaction
+	// Create the handle component for grab
 	handleComponent = CreateDefaultSubobject<UPhysicsHandleComponent>("PhysicsHandle");
-	// Create the offset component for interactable
-	offsetInteractableComponent = CreateDefaultSubobject<USceneComponent>("OffsetInteractable");
-	offsetInteractableComponent->SetupAttachment(RootComponent);
 }
 
 void APlayerPlateformer::BeginPlay()
