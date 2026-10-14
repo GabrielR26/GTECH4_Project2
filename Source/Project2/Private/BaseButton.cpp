@@ -2,6 +2,7 @@
 
 
 #include "BaseButton.h"
+#include "Activable.h"
 
 // Sets default values
 ABaseButton::ABaseButton()
@@ -28,4 +29,14 @@ void ABaseButton::Tick(float DeltaTime)
 void ABaseButton::Interact()
 {
 	onButtonPressed.Broadcast();
+	for (AActor* _actor : activableObjects)
+	{
+		if (!_actor)
+			continue;
+		IActivable* _activable = Cast<IActivable>(_actor);
+		if (!_activable)
+			continue;
+
+		_activable->Activate();
+	}
 }
