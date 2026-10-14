@@ -48,6 +48,9 @@ public:
 protected:
 	void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
+	void DoorOpen();
+
 	void Activate() override;
 	void Deactivate() override;
 };
