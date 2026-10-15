@@ -30,7 +30,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Variable", meta = (ClampMin = 10, ClampMax = 10000))
 	int power = 100;
 	// The explosion's radius
-	UPROPERTY(EditAnywhere, Category = "Variable", meta = (ClampMin = 10, ClampMax = 1000))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Variable", meta = (ClampMin = 10, ClampMax = 1000))
 	int radius = 100;
 
 public:	

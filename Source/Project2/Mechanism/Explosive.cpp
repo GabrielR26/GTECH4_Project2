@@ -53,5 +53,7 @@ void AExplosive::BeginOverlap(UPrimitiveComponent* _overlappedComponent, AActor*
 	fieldComponent->ApplyRadialVectorFalloffForce(true, GetActorLocation(), radius, power);
 	fieldComponent->ApplyRadialForce(true, GetActorLocation(), power * 100);
 
+
+
 	Destroy();
 }
