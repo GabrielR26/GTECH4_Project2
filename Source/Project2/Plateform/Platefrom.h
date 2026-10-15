@@ -32,10 +32,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Variable")
 	bool loop = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Variable")
+	bool changeState = false;
+
 	FVector startOffsetLocation;
 	FVector endOffsetLocation;
 	FVector destination;
-	bool changeState = false;
 	bool atStart = true;
 
 public:
