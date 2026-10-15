@@ -52,6 +52,11 @@ bool AWreckingBall::ShouldTickIfViewportsOnly() const
 	return true;
 }
 
+void AWreckingBall::Test()
+{
+	Activate();
+}
+
 void AWreckingBall::Activate()
 {
 	// "Awake" ball
