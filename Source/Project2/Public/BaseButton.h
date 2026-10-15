@@ -17,6 +17,7 @@ class PROJECT2_API ABaseButton : public AActor, public IInteractable
 	UPROPERTY(EditAnywhere)
 	TArray<AActor*> activableObjects;
 
+	UPROPERTY(BlueprintAssignable)
 	FOnButtonPressed onButtonPressed;
 	
 public:	
